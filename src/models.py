@@ -29,9 +29,9 @@ class SingleSportComplex(SportsComplex):
         self.sport = sport
 
 class MultiSportComplex(SportsComplex):
-    def __init__(self, name: str, location: str, manager: str, total_area: float, areas: Dict[str, str]):
+    def __init__(self, name: str, location: str, manager: str, total_area: float, areas: Dict[str, Dict[str, float]]):
         super().__init__(name, location, manager, total_area)
-        self.areas = areas 
+        self.areas = areas  # Format: {"Sport": {"area": float, "location": str}}
 
 class OlympicVenue:
     def __init__(self, name: str):
@@ -41,3 +41,19 @@ class OlympicVenue:
         self.num_multi_sport_complexes = 0
         self.single_sport_budget = 0.0
         self.multi_sport_budget = 0.0
+
+    def add_complex(self, complex: SportsComplex, budget: float):
+        self.complexes.append(complex)
+        if isinstance(complex, SingleSportComplex):
+            self.num_single_sport_complexes += 1
+            self.single_sport_budget += budget
+        elif isinstance(complex, MultiSportComplex):
+            self.num_multi_sport_complexes += 1
+            self.multi_sport_budget += budget
+
+    def remove_complex(self, complex: SportsComplex):
+        self.complexes.remove(complex)
+        if isinstance(complex, SingleSportComplex):
+            self.num_single_sport_complexes -= 1
+        elif isinstance(complex, MultiSportComplex):
+            self.num_multi_sport_complexes -= 1

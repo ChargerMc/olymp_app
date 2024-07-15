@@ -1,11 +1,13 @@
+from src.models import SportsComplex, OlympicVenue, Event
+
 class SportsComplexRepository:
     def __init__(self):
         self.complexes = []
 
-    def add_complex(self, complex):
+    def add_complex(self, complex: SportsComplex):
         self.complexes.append(complex)
         
-    def remove_complex(self, complex):
+    def remove_complex(self, complex: SportsComplex):
         self.complexes.remove(complex)
 
     def get_all_complexes(self):
@@ -21,10 +23,10 @@ class OlympicVenueRepository:
     def __init__(self):
         self.venues = []
 
-    def add_venue(self, venue):
+    def add_venue(self, venue: OlympicVenue):
         self.venues.append(venue)
         
-    def remove_venue(self, venue):
+    def remove_venue(self, venue: OlympicVenue):
         self.venues.remove(venue)
 
     def get_all_venues(self):
@@ -35,3 +37,8 @@ class OlympicVenueRepository:
             if venue.name == name:
                 return venue
         return None
+
+class DataStore:
+    def __init__(self):
+        self.sports_complexes = SportsComplexRepository()
+        self.olympic_venues = OlympicVenueRepository()
