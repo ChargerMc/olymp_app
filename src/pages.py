@@ -21,7 +21,6 @@ class OlympApp(ft.UserControl):
         self.venue_select = ft.Dropdown(label="Select Venue", width=300, options=[])
         self.complex_select = ft.Dropdown(label="Select Complex", width=300, options=[])
 
-        # Single Sport Complex Inputs
         self.single_sport_inputs = [
             ft.TextField(label="Complex Name", width=200),
             ft.TextField(label="Location", width=200),
@@ -31,7 +30,6 @@ class OlympApp(ft.UserControl):
             ft.TextField(label="Budget", width=150),
         ]
 
-        # Multi Sport Complex Inputs
         self.multi_sport_inputs = [
             ft.TextField(label="Complex Name", width=200),
             ft.TextField(label="Location", width=200),
@@ -42,7 +40,6 @@ class OlympApp(ft.UserControl):
         self.multi_sport_areas = ft.Column()
         self.add_area_button = ft.ElevatedButton("Add Area", on_click=self.add_area_input)
 
-        # Event Inputs
         self.event_inputs = [
             ft.TextField(label="Event Name", width=200),
             ft.TextField(label="Date (YYYY-MM-DD)", width=150),
