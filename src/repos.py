@@ -1,8 +1,9 @@
-from src.models import SportsComplex, OlympicVenue, Event
+from src.models import SportsComplex, OlympicVenue
+from typing import List
 
 class SportsComplexRepository:
     def __init__(self):
-        self.complexes = []
+        self.complexes: List[SportsComplex] = []
 
     def add_complex(self, complex: SportsComplex):
         self.complexes.append(complex)
@@ -21,7 +22,7 @@ class SportsComplexRepository:
 
 class OlympicVenueRepository:
     def __init__(self):
-        self.venues = []
+        self.venues: List[OlympicVenue] = []
 
     def add_venue(self, venue: OlympicVenue):
         self.venues.append(venue)

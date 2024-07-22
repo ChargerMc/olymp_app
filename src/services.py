@@ -31,6 +31,13 @@ class OlympicVenueService:
 
     def list_venues(self):
         return self.repository.get_all_venues()
+    
+    def add_complex_to_venue(self, venue_name: str, complex: SportsComplex, budget: float):
+        venue = self.repository.find_by_name(venue_name)
+        if not venue:
+            raise ValueError(f"Sede '{venue_name}' no encontrada.")
+        venue.add_complex(complex, budget)
+        return True
 
     def add_event_to_complex(self, complex_name: str, event: Event):
         complex = self.repository.find_by_name(complex_name)
