@@ -14,7 +14,7 @@ class SportsComplexRepository:
     def get_all_complexes(self):
         return self.complexes
     
-    def find_by_name(self, name):
+    def find_by_name(self, name: str):
         for complex in self.complexes:
             if complex.name == name:
                 return complex
@@ -33,7 +33,7 @@ class OlympicVenueRepository:
     def get_all_venues(self):
         return self.venues
 
-    def find_by_name(self, name):
+    def find_by_name(self, name: str):
         for venue in self.venues:
             if venue.name == name:
                 return venue

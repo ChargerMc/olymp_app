@@ -1,5 +1,6 @@
 import flet as ft
 
+
 from src.models import OlympicVenue, SingleSportComplex, MultiSportComplex, Event
 from src.repos import DataStore
 from src.services import SportsComplexService, OlympicVenueService
@@ -201,8 +202,8 @@ class OlympApp(ft.UserControl):
             self.venue_info.controls.append(ft.Text(f"Sede {self.venue_select.value} no encontrada", color=ft.colors.RED))
         self.update()
 
-    def show_snack_bar(self, text):
-        self.page.snack_bar = ft.SnackBar(ft.Text(text))
+    def show_snack_bar(self, text: str, isError=False):
+        self.page.snack_bar = ft.SnackBar(ft.Text(text, color=ft.colors.WHITE), bgcolor=ft.colors.RED if isError else ft.colors.GREEN)
         self.page.snack_bar.open = True
         self.page.update()
 
