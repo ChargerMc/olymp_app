@@ -26,7 +26,7 @@ class OlympApp(ft.UserControl):
             ft.TextField(label="Ubicación", width=200),
             ft.TextField(label="Nombre del administrador", width=200),
             ft.TextField(label="Deporte", width=200),
-            ft.TextField(label="Área totala (m2)", width=150),
+            ft.TextField(label="Área total (m2)", width=150),
             ft.TextField(label="Presupuesto", width=150),
         ]
 
@@ -34,7 +34,7 @@ class OlympApp(ft.UserControl):
             ft.TextField(label="Nombre del complejo", width=200),
             ft.TextField(label="Ubicación", width=200),
             ft.TextField(label="Nombre del administrador", width=200),
-            ft.TextField(label="Área totala (m2)", width=150),
+            ft.TextField(label="Área total (m2)", width=150),
             ft.TextField(label="Presupuesto", width=150),
         ]
         self.multi_sport_areas = ft.Column()
