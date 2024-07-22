@@ -31,7 +31,7 @@ class SingleSportComplex(SportsComplex):
 class MultiSportComplex(SportsComplex):
     def __init__(self, name: str, location: str, manager: str, total_area: float, areas: Dict[str, Dict[str, float]]):
         super().__init__(name, location, manager, total_area)
-        self.areas = areas  # Format: {"Sport": {"area": float, "location": str}}
+        self.areas = areas
 
 class OlympicVenue:
     def __init__(self, name: str):
