@@ -19,8 +19,9 @@ class SportsComplexService:
         for existing_event in complex.events:
             if existing_event.date == event.date:
                 raise ValueError(f"Ya existe un evento en la fecha {event.date} para el complejo '{complex_name}'.")
-            complex.add_event(event)
-            return True
+            
+        complex.add_event(event)
+        return True
 
 class OlympicVenueService:
     def __init__(self, repository: OlympicVenueRepository):

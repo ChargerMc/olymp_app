@@ -143,12 +143,15 @@ class OlympApp(ft.UserControl):
             return
         
         event = Event(name, date, duration, num_participants, num_judges)
-        if self.complex_service.add_event_to_complex(self.complex_select.value, event):
+        try:
+            self.complex_service.add_event_to_complex(self.complex_select.value, event)
             self.show_snack_bar(f"Evento añadido: {name} al complejo: {self.complex_select.value}")
             self.clear_inputs(self.event_inputs)
-        else:
-            self.show_snack_bar("Ocurrió un error al crear el evento. Complejo no encontrado.", True)
-        self.update()
+            self.update()
+        except ValueError as e:
+            self.show_snack_bar(str(e), True)
+        except Exception as e:
+            self.show_snack_bar("Ocurrió un error al crear el evento.", True)
 
     def show_venue_info(self, e):
         if not self.venue_select.value:
