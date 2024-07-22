@@ -216,45 +216,46 @@ class OlympApp(ft.UserControl):
         self.update()
 
     def update_tab_content(self):
-        if self.current_tab == 0:
-            self.tab_content.content = ft.Column([
-                ft.Row([
-                    self.venue_name_input,
-                    ft.ElevatedButton("Añadir sede", on_click=self.add_venue)
-                ]),
-                ft.Text("Sedes añadidas:", size=16, weight=ft.FontWeight.BOLD),
-                self.venue_list,
+        match self.current_tab:
+            case 0:
+                self.tab_content.content = ft.Column([
+                    ft.Row([
+                        self.venue_name_input,
+                        ft.ElevatedButton("Añadir sede", on_click=self.add_venue)
+                    ]),
+                    ft.Text("Sedes añadidas:", size=16, weight=ft.FontWeight.BOLD),
+                    self.venue_list,
             ])
-        elif self.current_tab == 1:
-            self.tab_content.content = ft.Column([
-                self.venue_select,
-                ft.Row(self.single_sport_inputs),
-                ft.ElevatedButton("Añadir complejo unideporte", on_click=self.add_single_sport_complex),
-                ft.Text("Complejos añadidos:", size=16, weight=ft.FontWeight.BOLD),
-                self.complex_list,
+            case 1:
+                self.tab_content.content = ft.Column([
+                    self.venue_select,
+                    ft.Row(self.single_sport_inputs),
+                    ft.ElevatedButton("Añadir complejo unideporte", on_click=self.add_single_sport_complex),
+                    ft.Text("Complejos añadidos:", size=16, weight=ft.FontWeight.BOLD),
+                    self.complex_list,
             ])
-        elif self.current_tab == 2:
-            self.tab_content.content = ft.Column([
-                self.venue_select,
-                ft.Row(self.multi_sport_inputs),
-                ft.Text("Áreas:", size=16, weight=ft.FontWeight.BOLD),
-                self.multi_sport_areas,
-                self.add_area_button,
-                ft.ElevatedButton("Aladir complejo multideporte", on_click=self.add_multi_sport_complex),
-                ft.Text("Complejos añadidos:", size=16, weight=ft.FontWeight.BOLD),
-                self.complex_list,
+            case 2:
+                self.tab_content.content = ft.Column([
+                    self.venue_select,
+                    ft.Row(self.multi_sport_inputs),
+                    ft.Text("Áreas:", size=16, weight=ft.FontWeight.BOLD),
+                    self.multi_sport_areas,
+                    self.add_area_button,
+                    ft.ElevatedButton("Aladir complejo multideporte", on_click=self.add_multi_sport_complex),
+                    ft.Text("Complejos añadidos:", size=16, weight=ft.FontWeight.BOLD),
+                    self.complex_list,
             ])
-        elif self.current_tab == 3:
-            self.tab_content.content = ft.Column([
-                self.complex_select,
-                ft.Row(self.event_inputs),
-                ft.ElevatedButton("Añadir evento", on_click=self.add_event),
+            case 3:
+                self.tab_content.content = ft.Column([
+                    self.complex_select,
+                    ft.Row(self.event_inputs),
+                    ft.ElevatedButton("Añadir evento", on_click=self.add_event),
             ])
-        elif self.current_tab == 4:
-            self.tab_content.content = ft.Column([
-                self.venue_select,
-                ft.ElevatedButton("Mostrar información de la sede", on_click=self.show_venue_info),
-                self.venue_info,
+            case 4:
+                self.tab_content.content = ft.Column([
+                    self.venue_select,
+                    ft.ElevatedButton("Mostrar información de la sede", on_click=self.show_venue_info),
+                    self.venue_info,
             ])
 
     def build(self):

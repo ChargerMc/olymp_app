@@ -13,10 +13,14 @@ class SportsComplexService:
 
     def add_event_to_complex(self, complex_name: str, event: Event):
         complex = self.repository.find_by_name(complex_name)
-        if complex:
+        if not complex:
+            raise ValueError(f"Complejo '{complex_name}' no encontrado.")
+
+        for existing_event in complex.events:
+            if existing_event.date == event.date:
+                raise ValueError(f"Ya existe un evento en la fecha {event.date} para el complejo '{complex_name}'.")
             complex.add_event(event)
             return True
-        return False
 
 class OlympicVenueService:
     def __init__(self, repository: OlympicVenueRepository):
@@ -28,25 +32,30 @@ class OlympicVenueService:
     def list_venues(self):
         return self.repository.get_all_venues()
 
-    def add_complex_to_venue(self, venue_name: str, complex: SportsComplex, budget: float):
-        venue = self.repository.find_by_name(venue_name)
-        if venue:
-            venue.add_complex(complex, budget)
-            return True
-        return False
+    def add_event_to_complex(self, complex_name: str, event: Event):
+        complex = self.repository.find_by_name(complex_name)
+        if not complex:
+            raise ValueError(f"Complejo '{complex_name}' no encontrado.")
+
+        for existing_event in complex.events:
+            if existing_event.date == event.date:
+                raise ValueError(f"Ya existe un evento en la fecha {event.date} para el complejo '{complex_name}'.")
+            
+        complex.add_event(event)
+        return True
 
     def get_venue_info(self, venue_name: str):
         venue = self.repository.find_by_name(venue_name)
-        if venue:
-            return {
-                "name": venue.name,
-                "num_single_sport_complexes": venue.num_single_sport_complexes,
-                "num_multi_sport_complexes": venue.num_multi_sport_complexes,
-                "single_sport_budget": venue.single_sport_budget,
-                "multi_sport_budget": venue.multi_sport_budget,
-                "complexes": [self.get_complex_info(complex) for complex in venue.complexes]
+        if not venue:
+            raise ValueError(f"Sede '{venue_name}' no encontrada.")
+        return {
+            "name": venue.name,
+            "num_single_sport_complexes": venue.num_single_sport_complexes,
+            "num_multi_sport_complexes": venue.num_multi_sport_complexes,
+            "single_sport_budget": venue.single_sport_budget,
+            "multi_sport_budget": venue.multi_sport_budget,
+            "complexes": [self.get_complex_info(complex) for complex in venue.complexes]
             }
-        return None
 
     def get_complex_info(self, complex):
         info = {
