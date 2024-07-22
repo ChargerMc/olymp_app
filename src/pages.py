@@ -65,7 +65,7 @@ class OlympApp(ft.UserControl):
         
     def add_multi_sport_complex(self, e):
         if not self.venue_select.value:
-            self.show_snack_bar("Selecciona la sede primero.")
+            self.show_snack_bar("Selecciona la sede primero.", True)
             return
         try:
             name, location, manager, total_area, budget = [input.value for input in self.multi_sport_inputs]
@@ -78,9 +78,9 @@ class OlympApp(ft.UserControl):
                 location = area_row.controls[2].value
                 areas[sport.strip()] = {"area": area, "location": location.strip()}
             if not areas:
-                raise ValueError("Al menos una área debe ser añadida.")
+                raise ValueError("Al menos una área debe ser añadida.", True)
         except ValueError as ve:
-            self.show_snack_bar(f"Valor inválido: {str(ve)}")
+            self.show_snack_bar(f"Valor inválido: {str(ve)}", True)
             return
         
         complex = MultiSportComplex(name, location, manager, total_area, areas)
@@ -111,14 +111,14 @@ class OlympApp(ft.UserControl):
 
     def add_single_sport_complex(self, e):
         if not self.venue_select.value:
-            self.show_snack_bar("Porfavor selecciona la sede primero.")
+            self.show_snack_bar("Porfavor selecciona la sede primero.", True)
             return
         try:
             name, location, manager, sport, total_area, budget = [input.value for input in self.single_sport_inputs]
             total_area = float(total_area)
             budget = float(budget)
         except ValueError:
-            self.show_snack_bar("Campo inválido, porfavor verifica todos los campos.")
+            self.show_snack_bar("Campo inválido, porfavor verifica todos los campos.", True)
             return
         
         complex = SingleSportComplex(name, location, manager, total_area, sport)
@@ -131,7 +131,7 @@ class OlympApp(ft.UserControl):
 
     def add_event(self, e):
         if not self.complex_select.value:
-            self.show_snack_bar("Porfavor selecciona el complejo primero.")
+            self.show_snack_bar("Porfavor selecciona el complejo primero.", True)
             return
         try:
             name, date, duration, num_participants, num_judges = [input.value for input in self.event_inputs]
@@ -139,7 +139,7 @@ class OlympApp(ft.UserControl):
             num_participants = int(num_participants)
             num_judges = int(num_judges)
         except ValueError:
-            self.show_snack_bar("Campo inválido. Porfavor verifica todos los campos.")
+            self.show_snack_bar("Campo inválido. Porfavor verifica todos los campos.", True)
             return
         
         event = Event(name, date, duration, num_participants, num_judges)
@@ -147,12 +147,12 @@ class OlympApp(ft.UserControl):
             self.show_snack_bar(f"Evento añadido: {name} al complejo: {self.complex_select.value}")
             self.clear_inputs(self.event_inputs)
         else:
-            self.show_snack_bar("Ocurrió un error al crear el evento. Complejo no encontrado.")
+            self.show_snack_bar("Ocurrió un error al crear el evento. Complejo no encontrado.", True)
         self.update()
 
     def show_venue_info(self, e):
         if not self.venue_select.value:
-            self.show_snack_bar("Porfavor selecciona la sede para ver la información.")
+            self.show_snack_bar("Porfavor selecciona la sede para ver la información.", True)
             return
         info = self.venue_service.get_venue_info(self.venue_select.value)
         if info:
